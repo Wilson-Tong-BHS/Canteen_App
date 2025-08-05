@@ -10,7 +10,21 @@ h1 {
     margin: auto;
 }
 .header {
+    background-color:  #004d40;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.logo {
+    background-color: #00695c;
+    color: white;
+    border: none;
+    padding: 10px, 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .hero-image{
@@ -20,4 +34,44 @@ h1 {
     background-repeat: no-repeat;
     background-size: 100%;
 
+}
+
+.banner{
+    background-color: #004d40;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    
+}
+
+button{
+    background-color: #004d41;
+    color: white;
+    padding: 50px 100px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 60px;
+    margin-right: 60px;
+    
+}
+.menu-buttons{
+    grid-template-columns: 2fr,2fr;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px; 
+    margin-bottom: 50px;
+}
+
+.menu-buttons
+
+.footer{
+    background-color:white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9em;
 }

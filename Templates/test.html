@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <h2 style="color:green;">ALL HOT FOOD</h2>
+    <ul>
+        {# Jinja loop, almost like Python #}
+        {% for food in hot_foods %}
+            <li><a href="/food/{{ food[0] }}">{{ food[1] }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
