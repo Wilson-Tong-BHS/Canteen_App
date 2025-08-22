@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Scroll Menu</title>
+    <link rel="stylesheet" href="filename='style.css'">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        img{
+            width: 400px;
+            height: 300px;
+        }
+
+        .item{
+            display: grid;
+            margin: 12px;
+            padding: 12px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #f9f9f9;
+            transition: transform 0.2s;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 24px;
+        }
+
+        .item:hover{
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!--Navigation tool -->
+    <nav>
+        {% for category in categories %}
+            <a href="#{{category.id}}">{{ category.name }}</a>
+        {% endfor %}
+    </nav>
+
+     {% for category in categories %}
+    <section id="{{ category.id }}">
+        <h1>{{ category.name }}</h1>
+        <div class="items">
+            {% if category.menu_items %}
+                {% for item in category.menu_items %}
+                <div class="item">
+                    {% if item.image_link %}
+                        <img src="{{ item.image_link }}" alt="{{ item.name }}">
+                    {% else %}
+                        <div class="placeholder-image">No Image</div>
+                    {% endif %}
+                    <h3>{{ item.name }}</h3>
+                    <p class="price">${{ "%.2f"|format(item.price) }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-items">No items available in this category</div>
+            {% endif %}
+        </div>
+    </section>
+    {% endfor %}
+    
+        <script>
+        // Add intersection observer to highlight current category in nav
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>

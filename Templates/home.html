@@ -4,40 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Burnside High School Canteen</title>
 </head>
 
 <body>
 
-<div class="Content">
+    <div class="Content">
     
-    <section class="hero-image">
-        <h1>Burnside High School Canteen</h1>
-    </section>
-</div>
+        <section class="hero-image">
+            <h1>Burnside High School Canteen</h1>
+        </section>
+    </div>
 
-<div class="banner">
-    <p>Welcome to the Burnside High School Canteen! Here you can check items in our canteen and give suggestions and ratings back! Enjoy!</p>
-</div>
+    <div class="banner">
+        <p>Welcome to the Burnside High School Canteen! Here you can check items in our canteen and give suggestions and ratings back! Enjoy!</p>
+    </div>
 
-<div class="menu-buttons">
-    <a href="/hot_food">Hot Food</a>
-    <a href="/sandwich">Sandwiches/Rolls/Wraps</a>
-    <a href="/muffin">Muffins/Slices/Cookies/Cakes</a>
-    <a href="/chip">Potato Chips</a>
-    <a href="/salad">Salads (Summer Only)</a>
-    <a href="/hot_food_different_meal">Hot Food (Different Meal Each Day)</a>
-    <a href="/cold_drink">Cold Drinks</a>
-    <a href="/ice_cream">Ice Creams</a>
-    <a href="/yoghurt_fruit">Fruit & Yoghurt</a>
-    <a href="/hot_drink">Hot Drinks</a>
-</div>
-
-    {{food[0][1]}}
-   
+    <div class="menu-buttons">
+        {% for category in categories %}
+            <a href="/menu#{{ category.id }}">{{ category.name }}</a>
+        {% endfor %}
+    </div>
 </body>
-
-
-
-
-
 </html>

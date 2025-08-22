@@ -1,30 +1,54 @@
 from flask import Flask, render_template
-from datetime import datetime
 import sqlite3
 
 #Creates Flask Application
 app = Flask(__name__)
 
-def get_db():
-    db= sqlite3.connect('food.db')
-    db.row_factory = sqlite3.Row
-
-    return db
-@app.route("/menu")
-@app.route("/menu/category")
-def menu(category=None):
-    return render_template("menu.html", category = category)
-
-
-#Route to show all food avaiable, test only
-@app.route('/')
-def home():
-    conn = sqlite3.connect('food.db')
+def get_menu_data():
+    conn = sqlite3.connect("food.db")
+    conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    cur.execute('SELECT * FROM menu_items')
-    food = cur.fetchall()
+
+    cur.execute("SELECT DISTINCT category FROM menu_items")
+    categories = cur.fetchall()
+
+    menu = []
+    for cat in categories:
+        category_name = cat["category"]
+        cur.execute("SELECT name, price, image_link FROM menu_items WHERE category = ? ORDER by name ASC", (category_name,))
+        items = cur.fetchall()
+
+        # Convert each item from Row to dictionary
+        menu_list = []
+        for item in items:
+            menu_list.append({
+                "name": item["name"],
+                "price": item["price"],
+                "image_link": item["image_link"]
+            })
+
+        menu.append({
+            "id": category_name.lower().replace(" ", "_").replace("(", "").replace(")", "").replace("&", "and"),
+            "name": category_name,
+            "menu_items": menu_list
+        })
+        
     conn.close()
-    return render_template('home.html', title='HOME', food = food)
+    return menu
+
+
+@app.route("/")
+def home():
+    categories = get_menu_data()
+    return render_template("home.html", categories=categories)
+
+
+@app.route("/menu")
+def menu():
+    categories = get_menu_data()
+    return render_template("menu_scroll.html", categories=categories)
+
+
 
 
 #Route to show all hot foods avaiable in food database.
