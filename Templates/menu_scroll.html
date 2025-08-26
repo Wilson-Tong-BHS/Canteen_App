@@ -38,6 +38,11 @@
 </head>
 <body>
 
+    <!-- Search Bar -->
+    <div style="width:100%;text-align:center;margin:32px 0 16px 0;">
+        <input id="searchBar" type="text" placeholder="Search menu items..." style="width:320px;padding:10px 16px;font-size:1.1em;border-radius:8px;border:1px solid #ccc;">
+    </div>
+
     <!--Navigation tool -->
     <nav>
         {% for category in categories %}
@@ -69,6 +74,24 @@
     {% endfor %}
     
         <script>
+        // Search/filter functionality
+        document.getElementById('searchBar').addEventListener('input', function(e) {
+            const search = e.target.value.toLowerCase();
+            document.querySelectorAll('section').forEach(section => {
+                let anyVisible = false;
+                section.querySelectorAll('.item').forEach(item => {
+                    const name = item.querySelector('h3').textContent.toLowerCase();
+                    if (name.includes(search)) {
+                        item.style.display = '';
+                        anyVisible = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                // Hide section if no items are visible
+                section.style.display = anyVisible ? '' : 'none';
+            });
+        });
         // Add intersection observer to highlight current category in nav
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
@@ -83,9 +106,19 @@
                             link.classList.add('active');
                         }
                     });
+                    // Change website title to current genre/category name
+                    const heading = entry.target.querySelector('h1');
+                    if (heading) {
+                        document.title = heading.textContent + ' | Canteen Menu';
+                    }
+                    // Change the URL to reflect the current genre/category
+                    const newUrl = `/menu/${id}`;
+                    if (window.location.pathname !== newUrl) {
+                        window.history.replaceState(null, '', newUrl);
+                    }
                 }
             });
-        }, { threshold: 0.5 });
+    }, { threshold: 0.15 });
         
         sections.forEach(section => {
             observer.observe(section);

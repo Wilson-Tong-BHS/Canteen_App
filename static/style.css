@@ -5,31 +5,7 @@
     gap: 24px;
     margin: 32px 0;
 }
-.item {
-    background: #f8f8f8;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 16px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-    margin-bottom: 12px;
-}
-.item h3 {
-    margin: 8px 0 4px 0;
-    font-size: 1.1em;
-}
-.item .price {
-    color: #004d40;
-    font-weight: bold;
-    margin-bottom: 0;
-}
+
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -80,6 +56,11 @@ h1 {
     
 }
 
+.menu-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
 
 .menu-buttons a {
     background-color: #004d40;
@@ -90,6 +71,7 @@ h1 {
     border-radius: 8px;
     font-weight: bold;
     transition: background-color 0.3s;
+
 }
 
 .menu-buttons a:hover {
