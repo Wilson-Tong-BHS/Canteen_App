@@ -59,8 +59,6 @@
                 <div class="item">
                     {% if item.image_link %}
                         <img src="{{ item.image_link }}" alt="{{ item.name }}">
-                    {% else %}
-                        <div class="placeholder-image">No Image</div>
                     {% endif %}
                     <h3>{{ item.name }}</h3>
                     <p class="price">${{ "%.2f"|format(item.price) }}</p>

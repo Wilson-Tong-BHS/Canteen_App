@@ -9,34 +9,18 @@
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    padding: 0px;
     background-color: white;
-    margin: 0;
+    margin: auto
 }
+
 h1 {
     color: white;
     margin: auto;
 }
-.header {
-    background-color:  #004d40;
-    color: white;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
-.logo {
-    background-color: #00695c;
-    color: white;
-    border: none;
-    padding: 10px, 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 .hero-image{
-    background-color: green;
+    background-color: #004d40;
     height: 150px;
     background-position: center;
     background-repeat: no-repeat;
@@ -46,20 +30,32 @@ h1 {
     justify-content: center;
 }
 
+.hero-image img {
+    width: 300px;
+    height: 150px;
+}
+
+.hero-image h1 {
+    color: white;
+    font-size: 2.5em;
+    margin-left: 500px;
+}
+
 .banner{
-    background-color: #004d40;
+    background-color: green;
     color: white;
     text-align: center;
     padding: 20px;
     font-size: 1.2em;
     font-weight: bold;
-    
 }
 
 .menu-buttons {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 24px;
+    margin: 50px;
+
 }
 
 .menu-buttons a {
