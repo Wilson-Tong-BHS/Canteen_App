@@ -88,7 +88,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(0,0,0,0.85);
+    background: #00695c;
     padding: 12px;
     text-align: center;
     z-index: 100;
@@ -131,38 +131,9 @@ section h1 {
     margin: auto;
 }
 
-/* Item card */
-.item {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
-    text-align: center;
-    padding: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.item img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.item h3 {
-    font-size: 1em;
-    margin: 10px 0 5px;
-    font-weight: 600;
-}
 
 .price {
     font-weight: bold;
-    color: #27ae60;
     font-size: 1.05em;
 }
 
@@ -181,4 +152,25 @@ section h1 {
     padding: 10px 20px;
     background: rgba(255,255,255,0.8);
     border-radius: 20px;
+}
+
+.item{
+    margin: 12px;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: transform 0.2s;
+    gap: 24px;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 32px 0;
+}
+
+.item:hover{
+    transform: scale(1.05);
 }

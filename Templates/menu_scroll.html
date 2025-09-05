@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canteen Scroll Menu</title>
-    <link rel="stylesheet" href="filename='style.css'">
+    <title>Canteen Menu</title>
+    <link rel="stylesheet" href="static/style.css">
     <style>
         html {
             scroll-behavior: smooth;
@@ -13,41 +13,22 @@
             width: 400px;
             height: 300px;
         }
-
-        .item{
-            margin: 12px;
-            padding: 12px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            background: #f9f9f9;
-            transition: transform 0.2s;
-            gap: 24px;
-        }
-
-        .items {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin: 32px 0;
-        }
-
-        .item:hover{
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
 
-    <!-- Search Bar -->
-    <div style="width:100%;text-align:center;margin:32px 0 16px 0;">
-        <input id="searchBar" type="text" placeholder="Search menu items..." style="width:320px;padding:10px 16px;font-size:1.1em;border-radius:8px;border:1px solid #ccc;">
-    </div>
+
 
     <!--Navigation tool -->
     <nav>
         {% for category in categories %}
             <a href="#{{category.id}}">{{ category.name }}</a>
         {% endfor %}
+
+            <!-- Search Bar -->
+        <div style="width:100%;text-align:center;margin:32px 0 16px 0;">
+        <input id="searchBar" type="text" placeholder="Search items here..." style="width:320px;padding:10px 16px;font-size:1.1em;border-radius:8px;border:1px solid #ccc;">
+        </div>
     </nav>
 
      {% for category in categories %}
@@ -64,21 +45,19 @@
                     <p class="price">${{ "%.2f"|format(item.price) }}</p>
                 </div>
                 {% endfor %}
-            {% else %}
-                <div class="no-items">No items available in this category</div>
             {% endif %}
         </div>
     </section>
     {% endfor %}
     
         <script>
-        // Search/filter functionality
+        // Search bar filter to make search function more human-friendly
         document.getElementById('searchBar').addEventListener('input', function(e) {
-            const search = e.target.value.toLowerCase();
+            const search = e.target.value.toLowerCase(); //converts input to lowercase (so the search function is case-insensitive)
             document.querySelectorAll('section').forEach(section => {
                 let anyVisible = false;
                 section.querySelectorAll('.item').forEach(item => {
-                    const name = item.querySelector('h3').textContent.toLowerCase();
+                    const name = item.querySelector('h3').textContent.toLowerCase(); //gets the name of the menu item and converts it to lowercase
                     if (name.includes(search)) {
                         item.style.display = '';
                         anyVisible = true;
@@ -90,29 +69,24 @@
                 section.style.display = anyVisible ? '' : 'none';
             });
         });
-        // Add intersection observer to highlight current category in nav
+        //grabs all sections and nav links
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
         
+        //creates an intersection observer to watch the sections
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('active');
-                        }
-                    });
                     // Change website title to current genre/category name
                     const heading = entry.target.querySelector('h1');
                     if (heading) {
                         document.title = heading.textContent + ' | Canteen Menu';
                     }
                     // Change the URL to reflect the current genre/category
-                    const newUrl = `/menu/${id}`;
-                    if (window.location.pathname !== newUrl) {
-                        window.history.replaceState(null, '', newUrl);
+                    const newurl = `/menu/${id}`;
+                    if (window.location.pathname !== newurl) {
+                        window.history.replaceState(null, '', newurl);
                     }
                 }
             });

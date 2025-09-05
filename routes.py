@@ -13,8 +13,8 @@ def get_menu_data():
     categories = cur.fetchall()
 
     menu = []
-    for cat in categories:
-        category_name = cat["category"]
+    for f in categories:
+        category_name = f["category"]
         cur.execute("SELECT name, price, image_link FROM menu_items WHERE category = ? ORDER by name ASC", (category_name,))
         items = cur.fetchall()
 
