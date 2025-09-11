@@ -28,7 +28,7 @@ def get_menu_data():
             })
 
         menu.append({
-            "id": category_name.lower().replace(" ", "_").replace("(", "").replace(")", "").replace("&", "and"),
+            "id": category_name.lower().replace(" ", "_").replace("(", "").replace(")", ""),
             "name": category_name,
             "menu_items": menu_list
         })
@@ -36,6 +36,9 @@ def get_menu_data():
     conn.close()
     return menu
 
+@app.errorhandler(404)
+def http_error_handler(error):
+    return render_template("404.html"), 404
 
 @app.route("/")
 def home():
