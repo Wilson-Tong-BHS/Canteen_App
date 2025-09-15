@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .item-detail {
+            text-align: center;
+            margin: 20px;
+        }
+        .item-detail img {
+            width: 400px;
+            height: 300px;
+            border-radius: 8px;
+        }
+        .item-detail h2 {
+            color: #004d40;
+        }
+        .item-detail p {
+            font-size: 18px;
+        }
+        .item-detail a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #004d40;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .item-detail a:hover {
+            background-color: #00695c;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="hero-image">
+            <h1>Burnside High School Canteen</h1>
+            <a href="/"><img src="/static/Images/BHS.png" alt="Burnside_High_School_Logo"></a>
+    </div>
+
+    <div class="item-detail">
+        <h2>{{ item.name }}</h2>
+        <img src="{{ item.image_link }}" alt="{{ item.name }}">
+        <p>Price: ${{ item.price }}</p>
+        <p>Description: {{ item.description }}</p>
+        {% if item.healthy_options %}
+            <p>Healthy Options: {{ item.healthy_options }}</p>
+        {% else %}
+            <p>No healthy options available.</p>
+        {% endif %}
+        <a href="/menu#hot_food_every_day">Back to Menu</a>
+
+    <div class="footer">
+        <h3>&copy; 2024 Burnside High School Canteen, all rights reserved.</h3>
+    </div>
+</body>
+</html>

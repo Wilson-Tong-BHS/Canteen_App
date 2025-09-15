@@ -13,37 +13,62 @@
             width: 400px;
             height: 300px;
         }
+        .header-hero-image {
+            text-align: center;
+            background-color:#004d40;
+            background-size: cover;
+            display: inline-block;
+            margin-top: -50px;
+        }
+
+        .header-hero-image img {
+            width: 300px;
+            height: 150px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
 
 
-
+      
+        
     <!--Navigation tool -->
+
     <nav>
+          <h1 class="header-hero-image">
+            <a href="/"><img src="/static/Images/BHS.png" alt="Burnside_High_School_Logo"></a>
+            Burnside High School Canteen
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input id="searchBar" type="text" placeholder="Search items here..." style="width:180px;padding:10px 16px;font-size:1.em;border-radius:8px;border:1px solid #ccc;">
+            </div>
+        </h1>
+
+        <!-- Navigation links to each category -->
+
         {% for category in categories %}
             <a href="#{{category.id}}">{{ category.name }}</a>
         {% endfor %}
 
-            <!-- Search Bar -->
-        <div style="width:100%;text-align:center;margin:32px 0 16px 0;">
-        <input id="searchBar" type="text" placeholder="Search items here..." style="width:320px;padding:10px 16px;font-size:1.1em;border-radius:8px;border:1px solid #ccc;">
-        </div>
+        
     </nav>
 
      {% for category in categories %}
-    <section id="{{ category.id }}">
+    <section  style="margin-top: 200px;" id="{{ category.id }}">
         <h1>{{ category.name }}</h1>
         <div class="items">
             {% if category.menu_items %}
                 {% for item in category.menu_items %}
-                <div class="item">
-                    {% if item.image_link %}
+                <a href="/item/{{ item.id }}">
+                    <div class="item">
+                        {% if item.image_link %}
                         <img src="{{ item.image_link }}" alt="{{ item.name }}">
-                    {% endif %}
-                    <h3>{{ item.name }}</h3>
-                    <p class="price">${{ "%.2f"|format(item.price) }}</p>
-                </div>
+                        {% endif %}
+                        <h3>{{ item.name }}</h3>
+                        <p class="price">${{ "%.2f"|format(item.price) }}</p>
+                    </div>
+                </a>
                 {% endfor %}
             {% endif %}
         </div>
@@ -84,8 +109,8 @@
                         document.title = heading.textContent + ' | Canteen Menu';
                     }
                     // Change the URL to reflect the current genre/category
-                    const newurl = `/menu/${id}`;
-                    if (window.location.pathname !== newurl) {
+                    const newurl = `/menu#${id}`;
+                    if (window.location.hash !== `#${id}`) {
                         window.history.replaceState(null, '', newurl);
                     }
                 }

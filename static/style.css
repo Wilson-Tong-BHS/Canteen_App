@@ -75,11 +75,11 @@ h1 {
 }
 
 .footer{
-    background-color:white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-around;
-    font-size: 0.9em;
+   background-color: #004d40;
+   color: white;
+   text-align: center;
+   margin-top: 100px;
+   padding: 50px;
 }
 
 /* Navigation bar */
@@ -88,7 +88,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    background: #00695c;
+    background: #004d40;
     padding: 12px;
     text-align: center;
     z-index: 100;
@@ -96,7 +96,6 @@ nav {
 
 nav a {
     color: white;
-    text-decoration: none;
     margin: 0 12px;
     font-weight: 500;
     font-size: 0.8em;
@@ -107,7 +106,6 @@ nav a:hover, nav a.active {
     color: #f1c40f;
 }
 
-/* Section styling */
 section {
     min-height: 100vh;
     padding: 80px 20px 20px;
@@ -174,3 +172,10 @@ section h1 {
 .item:hover{
     transform: scale(1.05);
 }
+
+.search-bar {
+    width:80%;
+    text-align:right;
+    margin:16px 0 0 0;
+}
+
