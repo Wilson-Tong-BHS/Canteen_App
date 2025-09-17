@@ -9,7 +9,9 @@ import sqlite3
 app = Flask(__name__)
 
 
-# Function to get menu categories and items
+'''Function to get menu categories and items'''
+
+
 def get_menu_data():
     conn = sqlite3.connect("food.db")
     # row factory to access columns by name
@@ -58,7 +60,9 @@ def get_menu_data():
     return menu
 
 
-# Function to get information about menu items
+'''Function to get information about menu items'''
+
+
 def get_menu_info(item_id):
     conn = sqlite3.connect("food.db")
     conn.row_factory = sqlite3.Row
