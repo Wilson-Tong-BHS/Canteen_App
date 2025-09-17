@@ -8,23 +8,24 @@
 </head>
 
 <body>
+        <!-- title -->
         <div class="hero-image">
-            <h1>Burnside High School Canteen</h1>
             <a href="/"><img src="/static/Images/BHS.png" alt="Burnside_High_School_Logo"></a>
+            <h1>Burnside High School Canteen</h1>
         </div>
 
-    <div class="banner">
-        <p>Welcome to the Burnside High School Canteen Menu!</p>
-    </div>
+    <div class="banner"> <p>Welcome to the Burnside High School Canteen Menu!</p> </div>
 
+    <!-- menu buttons -->
     <div class="menu-buttons">
         {% for category in categories %}
             <a href="/menu#{{ category.id }}">{{ category.name }}</a>
         {% endfor %}
     </div>
-
+    
+    <!-- footer -->
     <div class="footer">
-        <h3>&copy; 2024 Burnside High School Canteen, all rights reserved.</h3>
+        <h3>2024 Burnside High School Canteen, all rights reserved.</h3>
     </div>
 </body>
 </html>

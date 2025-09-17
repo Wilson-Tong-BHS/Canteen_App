@@ -1,3 +1,7 @@
+"""This routes.py contains routes for flask applications and functions to get data from the database food.db
+    Created by Wilson Tong
+ """
+
 from flask import Flask, render_template
 import sqlite3
 
@@ -5,29 +9,31 @@ import sqlite3
 app = Flask(__name__)
 
 
-# Function to get menu categories and items from the database
+# Function to get menu categories and items
 def get_menu_data():
     conn = sqlite3.connect("food.db")
+    # row factory to access columns by name
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
-    # Fetch all the food categories in the database
+    # get all the food categories in the database
     cur.execute("SELECT DISTINCT category FROM menu_items")
     categories = cur.fetchall()
 
-    # fetch the menu items from each category
+    # get the menu items from categories
     menu = []
     for cat in categories:
         category_name = cat["category"]
         cur.execute(
             "SELECT id, name, price, image_link FROM menu_items "
-            "WHERE category = ? ORDER by name ASC",
+            "WHERE category = ?",
             (category_name,)
         )
         items = cur.fetchall()
 
-        # Convert each item from Row to dictionary
+        # turn each item from Row to dictionary
         menu_list = []
+        # creates a loop to repeat each item
         for item in items:
             menu_list.append({
                 "id": item["id"],
@@ -43,22 +49,22 @@ def get_menu_data():
                 .replace("(", "")
                 .replace(")", "")
             ),
-            # Display name for the category
+            # Display name
             "name": category_name,
-            # Display menu items for the category
+            # Display menu items
             "menu_items": menu_list
-        })
+            })
     conn.close()
     return menu
 
 
-# Function to get detailed information about menu items
+# Function to get information about menu items
 def get_menu_info(item_id):
     conn = sqlite3.connect("food.db")
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
-    # Gets detailed information about a specific menu item by id
+    # SQL query to get information about  menu item by id
     cur.execute(
         "SELECT f.image_link, f.name, f.price, f.description, "
         "GROUP_CONCAT(ho.name, ',') AS healthy_options "
@@ -74,7 +80,7 @@ def get_menu_info(item_id):
     return menu_info
 
 
-# Error handler for 404 errors
+# error handler for 404 errors
 @app.errorhandler(404)
 def http_error_handler(error):
     return render_template("404.html"), 404
@@ -98,9 +104,9 @@ def menu():
 @app.route('/item/<int:item_id>')
 def item_detail(item_id):
     try:
-        item = get_menu_info(item_id)
-        if item:
-            return render_template('item_detail.html', item=item)
+        item_detail = get_menu_info(item_id)
+        if item_detail:
+            return render_template('item_detail.html', item=item_detail)
         else:
             return render_template('404.html'), 404
     # Catch OverflowError if item_id is too large

@@ -1,17 +1,12 @@
-/* 3-column grid for menu items */
-.items {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin: 32px 0;
-}
-
-
+/* General Styles */
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: white;
-    margin: auto
+    margin: auto;
+    display: flex;
+    flex-direction: column;
 }
+
 
 h1 {
     color: white;
@@ -19,37 +14,40 @@ h1 {
 }
 
 
+/* Hero Image Styles for home and item details page*/
 .hero-image{
     background-color: #004d40;
-    height: 150px;
-    background-position: center;
+    height: 110px;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     align-items: center;
-    justify-content: center;
+    text-align: left;
+    padding-right: 100px;
 }
 
 .hero-image img {
-    width: 300px;
-    height: 150px;
+    width: 240px;
+    height: 120px;
+    margin-right: -300px;
 }
 
 .hero-image h1 {
     color: white;
-    font-size: 2.5em;
+    font-size: 40px;
     margin-left: 500px;
 }
 
 .banner{
-    background-color: green;
+    background-color: #1ba084;
     color: white;
     text-align: center;
     padding: 20px;
-    font-size: 1.2em;
+    font-size: 20px;
     font-weight: bold;
 }
 
+/* Menu Buttons Styles */
 .menu-buttons {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -65,47 +63,97 @@ h1 {
     text-align: center;
     text-decoration: none;
     border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-
+    transition: background-color 0.5s;
 }
 
 .menu-buttons a:hover {
-    background-color: #00695c;
+    background-color: #1ba084;
 }
 
+/* Footer Styles */
 .footer{
-   background-color: #004d40;
-   color: white;
-   text-align: center;
-   margin-top: 100px;
-   padding: 50px;
+    margin-top: 100px;
+    background-color: #004d41;
+    color: white;
+    padding: 50px;
+    background-size: cover;
 }
 
-/* Navigation bar */
+.footer h3{
+    text-align: center;
+}
+/* Search Bar Styles */
+.search-bar {
+    width:80%;
+    text-align:right;
+    margin:16px 0 0 0;
+}
+
+    /* Navigation Bar Styles */
 nav {
+    background-color: #004d41;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: #004d40;
-    padding: 12px;
-    text-align: center;
     z-index: 100;
+    }
+
+.nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    }
+
+
+
+.nav-header {
+    flex: 1;
+    text-align: center;
+    color: white;
+}
+
+.search{
+            width:180px;
+            padding:10px 16px;
+            font-size: 16px;
+            border-radius:10px;
+        }
+
+.nav_search {
+    text-align: right;
+        }
+
+.nav_links{
+    padding: 10px 10px;
+    
+}
+
+.linkage{
+    margin: 0 18px;
 }
 
 nav a {
     color: white;
-    margin: 0 12px;
-    font-weight: 500;
-    font-size: 0.8em;
-    transition: color 0.2s ease;
+    /* 67! */
+    font-size: 12.67px;
+    transition: color 0.5s;
 }
 
 nav a:hover, nav a.active {
-    color: #f1c40f;
+    color: yellow;
 }
 
+/* 3-column grid for menu items */
+.category_items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+}
+
+/* Section Styles for menu items */
 section {
     min-height: 100vh;
     padding: 80px 20px 20px;
@@ -113,69 +161,61 @@ section {
     position: relative;
 }
 
+/* Category name styles */
 section h1 {
     text-align: center;
-    font-size: 2.2em;
+    font-size: 32px;
     margin-bottom: 25px;
     color: #004d40;
 }
 
-/* Item grid */
-.items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-
+/* Item price styles */
 .price {
     font-weight: bold;
-    font-size: 1.05em;
-}
-
-.next-category {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    text-align: center;
-}
-
-.next-category a {
-    color: #004d40;
     text-decoration: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    background: rgba(255,255,255,0.8);
-    border-radius: 20px;
 }
 
+/* Individual Item Style */
 .item{
     margin: 12px;
     padding: 12px;
-    border: 1px solid #eee;
+    border: 1px solid white;
     border-radius: 8px;
     background: #f9f9f9;
-    transition: transform 0.2s;
+    transition: transform 0.5s;
     gap: 24px;
-}
-
-.items {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin: 32px 0;
+    color: black;
 }
 
 .item:hover{
     transform: scale(1.05);
 }
 
-.search-bar {
-    width:80%;
-    text-align:right;
-    margin:16px 0 0 0;
-}
+/* Item detail page style: */
+    .item_detail {
+        text-align: center;
+        }
+    .item_detail img {
+        width: 400px;
+        height: 300px;
+        border-radius: 8px;
+    }
+    .item_detail h2 {
+        color: #004d41;
+    }
+    .item_detail p {
+        font-size: 18px;
+    }
+    .item_detail a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #004d41;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .item_detail a:hover {
+        background-color: #1ba084;
+        }
 

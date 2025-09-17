@@ -13,51 +13,36 @@
             width: 400px;
             height: 300px;
         }
-        .header-hero-image {
-            text-align: center;
-            background-color:#004d40;
-            background-size: cover;
-            display: inline-block;
-            margin-top: -50px;
-        }
-
-        .header-hero-image img {
-            width: 300px;
-            height: 150px;
-            margin: 0 auto;
+        a{
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-
-
-      
-        
     <!--Navigation tool -->
-
     <nav>
-          <h1 class="header-hero-image">
-            <a href="/"><img src="/static/Images/BHS.png" alt="Burnside_High_School_Logo"></a>
-            Burnside High School Canteen
-            <!-- Search Bar -->
-            <div class="search-bar">
-                <input id="searchBar" type="text" placeholder="Search items here..." style="width:180px;padding:10px 16px;font-size:1.em;border-radius:8px;border:1px solid #ccc;">
+        <div class="hero-image">
+            
+                <a href="/"><img src="/static/Images/BHS.png" alt="Burnside_High_School_Logo"></a>
+
+                <h1>Burnside High School Canteen</h1>
+            <div class="nav_search">
+                <input class="search" id="searchBar" type="text" placeholder="Search items here...">
             </div>
-        </h1>
+        </div>
 
-        <!-- Navigation links to each category -->
-
-        {% for category in categories %}
-            <a href="#{{category.id}}">{{ category.name }}</a>
-        {% endfor %}
-
-        
+        <div class="nav_links">
+            {% for category in categories %}
+                <a class="linkage" href="#{{category.id}}">{{ category.name }}</a>
+            {% endfor %}
+        </div>
     </nav>
 
+    <!-- Shows whole menu items  -->
      {% for category in categories %}
-    <section  style="margin-top: 200px;" id="{{ category.id }}">
+    <section  style="margin-top: 100px;" id="{{ category.id }}">
         <h1>{{ category.name }}</h1>
-        <div class="items">
+        <div class="category_items">
             {% if category.menu_items %}
                 {% for item in category.menu_items %}
                 <a href="/item/{{ item.id }}">
@@ -68,59 +53,75 @@
                         <h3>{{ item.name }}</h3>
                         <p class="price">${{ "%.2f"|format(item.price) }}</p>
                     </div>
-                </a>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </section>
+            </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+</section>
     {% endfor %}
     
         <script>
-        // Search bar filter to make search function more human-friendly
-        document.getElementById('searchBar').addEventListener('input', function(e) {
-            const search = e.target.value.toLowerCase(); //converts input to lowercase (so the search function is case-insensitive)
+        // Search bar filter to make it more human-friendly
+        document.getElementById('searchBar').addEventListener('input', function(e) {// Get input from search bar
+            const search = e.target.value.toLowerCase(); // Converts the words to lowercase
             document.querySelectorAll('section').forEach(section => {
-                let anyVisible = false;
-                section.querySelectorAll('.item').forEach(item => {
-                    const name = item.querySelector('h3').textContent.toLowerCase(); //gets the name of the menu item and converts it to lowercase
+                let visible = false;
+                section.querySelectorAll('.item').forEach(item => { // grabs all items in the menu
+                    const name = item.querySelector('h3').textContent.toLowerCase(); // gets the name of the menu item and turns it lowercase
+                    // Check if the name is the same as the search text
                     if (name.includes(search)) {
                         item.style.display = '';
-                        anyVisible = true;
-                    } else {
+                        visible = true;
+                    } 
+                    //If the name does not match any names in the menu, show nothing
+                    else {
                         item.style.display = 'none';
+                        //footer section hides if no items are visible
+                        document.querySelector('.footer').style.display = 'none';
                     }
-                });
-                // Hide section if no items are visible
-                section.style.display = anyVisible ? '' : 'none';
             });
+                // Hide section if no items are visible
+                section.style.display = visible ? '' : 'none';
         });
+    });
         //grabs all sections and nav links
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
         
-        //creates an intersection observer to watch the sections
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+        //creates an observer to watch the genres/categories
+        const observer = new IntersectionObserver((entries) => {// callback when intersection changes
+            // loop
+            entries.forEach(entry => { 
+                // check if the genre is intersecting
                 if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    // Change website title to current genre/category name
-                    const heading = entry.target.querySelector('h1');
-                    if (heading) {
+                    const id = entry.target.getAttribute('id'); // get the id of category
+                    const heading = entry.target.querySelector('h1');// get the heading of category
+                    // change the website title to reflect the current category
+                    if (heading){
                         document.title = heading.textContent + ' | Canteen Menu';
                     }
-                    // Change the URL to reflect the current genre/category
+                    // change the URL to reflect the current genre/category
                     const newurl = `/menu#${id}`;
                     if (window.location.hash !== `#${id}`) {
                         window.history.replaceState(null, '', newurl);
+                    
                     }
-                }
-            });
-    }, { threshold: 0.15 });
+               
+            }
+        });
+    }, { threshold: 0.15 }); //if 15% of the genre is scrolled then the code above runs
         
+    // checking each category to see if it is intersecting
         sections.forEach(section => {
-            observer.observe(section);
+            observer.observe(section); //observe each category
         });
     </script>
+
+
+<!-- Footer -->
+<div class="footer">
+        <h3>2024 Burnside High School Canteen, all rights reserved.</h3>
+    </div>
 
 </body>
 </html>
