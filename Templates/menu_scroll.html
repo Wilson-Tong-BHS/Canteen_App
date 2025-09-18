@@ -16,6 +16,14 @@
         a{
             text-decoration: none;
         }
+
+        h3{
+            color: black;
+        }
+        
+        p{
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -39,21 +47,26 @@
     </nav>
 
     <!-- Shows whole menu items  -->
-     {% for category in categories %}
-    <section  style="margin-top: 100px;" id="{{ category.id }}">
-        <h1>{{ category.name }}</h1>
-        <div class="category_items">
-                {% for item in category.menu_items %}
-                <a href="/item/{{ item.id }}">
+    {% for category in categories %}
+    <section id="{{ category.id }}">
+            <h1>{{ category.name }}</h1>
+            <div class="category_items">
+                    {% for item in category.menu_items %}
                     <div class="item">
-                        <img src="{{ item.image_link }}" alt="{{ item.name }}">
-                        <h3>{{ item.name }}</h3>
-                        <p class="price"> Price: ${{ "%.2f"|format(item.price) }}</p>
+                            <a href="/item/{{ item.id }}">
+                            <img src="{{ item.image_link }}" alt="{{ item.name }}">
+                            <h3>{{ item.name }}</h3>
+                            <p class="price"> Price: ${{ "%.2f"|format(item.price) }}</p>
+                            </a>
                     </div>
-            </a>
-                {% endfor %}
-    </div>
-</section>
+                    
+    {% endfor %}
+            </div>
+    </section>
+
+   
+        
+
     {% endfor %}
     
         <script>
@@ -64,22 +77,18 @@
                 let visible = false;
                 section.querySelectorAll('.item').forEach(item => { // grabs all items
                     const name = item.querySelector('h3').textContent.toLowerCase(); // gets the name of the menu item and turns it lowercase
+        
                     // Check if the name is the same as the search text
                     if (name.includes(search)) {
                         item.style.display= ''; // shows the item if it matches
                         visible = true;
-                    } 
+                } 
+                    else {
+                        item.style.display = 'none'; // hides the item if it doesn't match
 
-                    //show nothing if no match
-                    else{
-                        item.style.display = 'none';
-                        //footer section hides if no items are visible
-                        document.querySelector('.footer').style.display = 'none';
-                        visiable = false;
                     }
-
-            });
-                section.style.display = visible ?'' : 'none';
+                });
+                section.style.display = visible ? '' : 'none';
         });
     });
         //grabs sections and nav links
@@ -114,12 +123,6 @@
             observer.observe(section); //observe each category
         });
     </script>
-
-
-<!-- Footer -->
-<div class="footer">
-        <h3>2024 Burnside High School Canteen, all rights reserved.</h3>
-    </div>
 
 </body>
 </html>

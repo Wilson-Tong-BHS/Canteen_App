@@ -97,14 +97,14 @@ nav {
     left: 0;
     width: 100%;
     z-index: 100;
-    }
+}
 
 .nav-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    }
+}
 
 
 
@@ -115,11 +115,11 @@ nav {
 }
 
 .search{
-            width:180px;
-            padding:10px 16px;
-            font-size: 16px;
-            border-radius:10px;
-        }
+        width:180px;
+        padding:10px 16px;
+        font-size: 16px;
+        border-radius:10px;
+    }
 
 .nav_search {
     text-align: right;
@@ -147,16 +147,20 @@ nav a:hover, nav a.active {
 
 /* 3-column grid for menu items */
 .category_items {
-
     gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 /* Section Styles for menu items */
 section {
+    margin-top: 100px;
     min-height: 100vh;
     padding: 80px 20px 20px;
     box-sizing: border-box;
     position: relative;
+
+
 }
 
 /* Category name styles */
@@ -182,9 +186,6 @@ section h1 {
     background: #f9f9f9;
     transition: transform 0.5s;
     gap: 24px;
-    color: black;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 }
 
 .item:hover{
