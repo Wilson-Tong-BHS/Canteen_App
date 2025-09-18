@@ -27,7 +27,7 @@
 
                 <h1>Burnside High School Canteen</h1>
             <div class="nav_search">
-                <input class="search" id="searchBar" type="text" placeholder="Search items here...">
+                <input class="search" id="searchBar" maxlength= "30" type="text" placeholder="Search items here...">
             </div>
         </div>
 
@@ -46,11 +46,9 @@
                 {% for item in category.menu_items %}
                 <a href="/item/{{ item.id }}">
                     <div class="item">
-                        {% if item.image_link %}
                         <img src="{{ item.image_link }}" alt="{{ item.name }}">
-                        {% endif %}
                         <h3>{{ item.name }}</h3>
-                        <p class="price">${{ "%.2f"|format(item.price) }}</p>
+                        <p class="price"> Price: ${{ "%.2f"|format(item.price) }}</p>
                     </div>
             </a>
                 {% endfor %}
@@ -62,24 +60,26 @@
         // Search bar filter
         document.getElementById('searchBar').addEventListener('input', function(e) {// Get input from search bar
             const search = e.target.value.toLowerCase(); // Converts the words to lowercase
-        document.querySelectorAll('section').forEach(section => {
+            document.querySelectorAll('section').forEach(section => {
                 let visible = false;
                 section.querySelectorAll('.item').forEach(item => { // grabs all items
                     const name = item.querySelector('h3').textContent.toLowerCase(); // gets the name of the menu item and turns it lowercase
                     // Check if the name is the same as the search text
                     if (name.includes(search)) {
-                        item.style.display = '';
+                        item.style.display= ''; // shows the item if it matches
                         visible = true;
                     } 
+
                     //show nothing if no match
-                    else {
+                    else{
                         item.style.display = 'none';
                         //footer section hides if no items are visible
                         document.querySelector('.footer').style.display = 'none';
+                        visiable = false;
                     }
+
             });
-                // Hide section if no match
-                section.style.display = visible ? '' : 'none';
+                section.style.display = visible ?'' : 'none';
         });
     });
         //grabs sections and nav links

@@ -147,10 +147,8 @@ nav a:hover, nav a.active {
 
 /* 3-column grid for menu items */
 .category_items {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
 
+    gap: 24px;
 }
 
 /* Section Styles for menu items */
@@ -185,6 +183,8 @@ section h1 {
     transition: transform 0.5s;
     gap: 24px;
     color: black;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .item:hover{
