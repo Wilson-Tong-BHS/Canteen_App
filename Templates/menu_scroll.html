@@ -20,17 +20,18 @@
         h3{
             color: black;
         }
-        
+
         p{
             color: black;
         }
     </style>
 </head>
+
+
 <body>
     <!--Navigation tool -->
     <nav>
         <div class="hero-image">
-            
                 <a href="/"><img src="/static/Images/BHS.png" alt="Burnside_High_School_Logo"></a>
 
                 <h1>Burnside High School Canteen</h1>
@@ -65,8 +66,6 @@
     </section>
 
    
-        
-
     {% endfor %}
     
         <script>
@@ -111,6 +110,7 @@
                     const newurl = `/menu#${id}`;
                     if (window.location.hash !== `#${id}`) {
                         window.history.replaceState(null, '', newurl);
+                    
                     
                     }
                
