@@ -43,7 +43,6 @@
     <section  style="margin-top: 100px;" id="{{ category.id }}">
         <h1>{{ category.name }}</h1>
         <div class="category_items">
-            {% if category.menu_items %}
                 {% for item in category.menu_items %}
                 <a href="/item/{{ item.id }}">
                     <div class="item">
@@ -54,8 +53,7 @@
                         <p class="price">${{ "%.2f"|format(item.price) }}</p>
                     </div>
             </a>
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
     </div>
 </section>
     {% endfor %}
