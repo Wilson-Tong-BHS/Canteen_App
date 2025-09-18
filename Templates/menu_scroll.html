@@ -82,7 +82,7 @@
                 section.style.display = visible ? '' : 'none';
         });
     });
-        //grabs all sections and nav links
+        //grabs sections and nav links
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
         
@@ -90,15 +90,15 @@
         const observer = new IntersectionObserver((entries) => {// callback when intersection changes
             // loop
             entries.forEach(entry => { 
-                // check if the genre is intersecting
+                // check if genre is intersecting
                 if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id'); // get the id of category
-                    const heading = entry.target.querySelector('h1');// get the heading of category
-                    // change the website title to reflect the current category
+                    const id = entry.target.getAttribute('id'); // get id of category
+                    const heading = entry.target.querySelector('h1');// get heading of category
+                    // change the website title to current category
                     if (heading){
                         document.title = heading.textContent + ' | Canteen Menu';
                     }
-                    // change the URL to reflect the current genre/category
+                    // change the URL to current genre/category
                     const newurl = `/menu#${id}`;
                     if (window.location.hash !== `#${id}`) {
                         window.history.replaceState(null, '', newurl);
