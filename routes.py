@@ -9,15 +9,23 @@ import sqlite3
 app = Flask(__name__)
 
 
-'''Function to get menu categories and items'''
+# function to connect to the database
 
-
-def get_menu_data():
+def get_db():
     conn = sqlite3.connect("food.db")
     # row factory to access columns by name
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
+    return conn, cur
 
+def close_db(conn):
+    conn.close()
+
+'''Function to get menu categories and items'''
+
+
+def get_menu_data():
+    conn, cur = get_db()
     # get all the food categories in the database
     cur.execute("SELECT DISTINCT category FROM menu_items")
     categories = cur.fetchall()
@@ -56,7 +64,7 @@ def get_menu_data():
             # Display menu items
             "menu_items": menu_list
             })
-    conn.close()
+    close_db(conn)
     return menu
 
 
@@ -64,9 +72,7 @@ def get_menu_data():
 
 
 def get_menu_info(item_id):
-    conn = sqlite3.connect("food.db")
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
+    conn, cur = get_db()
 
     # SQL query to get information about  menu item by id
     cur.execute(
@@ -80,7 +86,7 @@ def get_menu_info(item_id):
         (item_id,)
     )
     menu_info = cur.fetchone()
-    conn.close()
+    close_db(conn)
     return menu_info
 
 
