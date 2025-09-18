@@ -59,26 +59,26 @@
     {% endfor %}
     
         <script>
-        // Search bar filter to make it more human-friendly
+        // Search bar filter
         document.getElementById('searchBar').addEventListener('input', function(e) {// Get input from search bar
             const search = e.target.value.toLowerCase(); // Converts the words to lowercase
-            document.querySelectorAll('section').forEach(section => {
+        document.querySelectorAll('section').forEach(section => {
                 let visible = false;
-                section.querySelectorAll('.item').forEach(item => { // grabs all items in the menu
+                section.querySelectorAll('.item').forEach(item => { // grabs all items
                     const name = item.querySelector('h3').textContent.toLowerCase(); // gets the name of the menu item and turns it lowercase
                     // Check if the name is the same as the search text
                     if (name.includes(search)) {
                         item.style.display = '';
                         visible = true;
                     } 
-                    //If the name does not match any names in the menu, show nothing
+                    //show nothing if no match
                     else {
                         item.style.display = 'none';
                         //footer section hides if no items are visible
                         document.querySelector('.footer').style.display = 'none';
                     }
             });
-                // Hide section if no items are visible
+                // Hide section if no match
                 section.style.display = visible ? '' : 'none';
         });
     });
@@ -86,7 +86,7 @@
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
         
-        //creates an observer to watch the genres/categories
+        //creates an observer
         const observer = new IntersectionObserver((entries) => {// callback when intersection changes
             // loop
             entries.forEach(entry => { 
