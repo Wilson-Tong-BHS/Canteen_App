@@ -1,4 +1,5 @@
-"""This routes.py contains routes for flask applications and functions to get data from the database food.db
+"""This routes.py contains routes for flask applications
+    and functions to get data from the database food.db
     Created by Wilson Tong
  """
 
@@ -18,8 +19,10 @@ def get_db():
     cur = conn.cursor()
     return conn, cur
 
+
 def close_db(conn):
     conn.close()
+
 
 '''Function to get menu categories and items'''
 
